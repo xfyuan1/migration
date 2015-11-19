@@ -1,4 +1,4 @@
-#Instalation:
+#Installation:
 
 Download ZIP (bottom right of page)
 
