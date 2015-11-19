@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Check_Da_Box",
+  "name": "Coursera Migrations Modularization Extension",
   "description": "This extension will check the non-video or quiz boxes",
   "version": "1.0",
 
