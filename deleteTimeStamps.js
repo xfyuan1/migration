@@ -16,8 +16,6 @@
 // 78:90
 
 
-var regEx = /[\(\[]([0-9]?[0-9]|[0-9])[:.][0-9][0-9][\)\]]/g
-
 //turns querSelectorAll from array like into array --> Note found inConsole.js
 function toArray (protoList) {
 	return Array.prototype.slice.call(protoList, 0)
@@ -34,9 +32,10 @@ function findVideo (element) {
 //div div div input[type=text placeholder="lecture title" value="SOME TEXT"] 
 
 toArray(elList.filter(findVideo)).forEach(function (i) {
+	var regEx = /[\(\[]([0-9]?[0-9]|[0-9])[:.][0-9][0-9][\)\]]/g
 	var element = i.querySelector("div div div input[class=coursera-admin-item-title-input]")
 	var Newvalue = element.getAttribute("value").replace(regEx, "")
-	element.setAttribute("value", Newvalue)
+	element.setAttribute("value", Newvalue).click()
 })
 
 //elList.querySelectorAll("div div div input[class=coursera-admin-item-title-input]")
