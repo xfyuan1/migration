@@ -5,7 +5,7 @@
   "version": "1.0",
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["http://*/*", "https://*/*"],
       "js": ["jQuery.js"]
     }
   ],
