@@ -36,7 +36,9 @@ toArray(elList.filter(findVideo)).forEach(function (i) {
 	var element = i.querySelector("div div div input[class=coursera-admin-item-title-input]")
 	var Newvalue = element.getAttribute("value").replace(regEx, "")
 	element.setAttribute("value", Newvalue)
+	console.log(parent)
 	$(element).trigger('blur')
+	element.blur()
 })
 
 //elList.querySelectorAll("div div div input[class=coursera-admin-item-title-input]")
