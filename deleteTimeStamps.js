@@ -40,9 +40,6 @@ toArray(elList.filter(findVideo)).forEach(function (i) {
 })
 
 //elList.querySelectorAll("div div div input[class=coursera-admin-item-title-input]")
-	
-
-
 
 
 
