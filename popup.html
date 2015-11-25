@@ -1,12 +1,32 @@
 <!doctype html>
 <html>
   <head>
-    <title>Check Da Box</title>
+    <link rel="stylesheet" type="text/css" href="extension_styling.css">
+    <title>Migration Extensions</title>
     <script src="popup.js"></script>
   </head>
   <body>
-    <button id="checkBox">Check Boxes</button>
+    <button class="button" id="checkBox">Check Boxes</button>
     <p></p>
-    <button id="deleteTimes">Delete Times</button>
+    <button class="button" id="deleteTimes">Delete Times</button>
+	<p></p>
+    <form id="sessionId"> <!-- fill this in -->
+		Phoenix Course ID:<br> <input type="text" name="sessionId">
+		<input type="button" value="submit">
+	</form>	
   </body>
 </html>
+
+
+<!-- 
+<form id="frm1" action="form_action.asp">
+  First name: <input type="text" name="fname"><br>
+  Last name: <input type="text" name="lname"><br><br>
+  <input type="button" onclick="myFunction()" value="Submit">
+</form>
+
+<script>
+function myFunction() {
+    document.getElementById("frm1").submit();
+}
+</script> -->
