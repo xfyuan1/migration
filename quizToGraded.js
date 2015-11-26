@@ -5,24 +5,12 @@
 
 'use strict';
 
-function popUp(text) {
-
-	var newWindow = window.open("","Graded Quiz Json","width=500,height=500")
-    
-    var html = "<html><head></head><body><b>"+ text +"</b></html>"
-
-    newWindow.document.open()
-    newWindow.document.write(html)
-    newWindow.document.close()
-
-}
-
 chrome.runtime.onMessage.addListener( function(courseId) { 
-	manipulateJson(courseId)
+	changeToGraded(courseId)
 })
 
 
-function manipulateJson (courseId) {
+function changeToGraded (courseId) {
 
 	request({
 		type: 'get',
@@ -76,10 +64,10 @@ function manipulateJson (courseId) {
 								console.log('POST Request for ' + elem.content.definition.assessmentId)
 
 
-									////newly generated id is equal to assessmentId
+									//newly generated id is equal to assessmentId
 								if(i.id == undefined) {
 									
-									////Should throw error here
+									//Should throw error here
 									console.log('no assessmentId found')
 
 								}
@@ -132,3 +120,17 @@ function request (args) {
 		})
 	)
 }
+
+
+function popUp(text) {
+
+	var newWindow = window.open("","Graded Quiz Json","width=500,height=500")
+    
+    var html = "<html><head></head><body><b>"+ text +"</b></html>"
+
+    newWindow.document.open()
+    newWindow.document.write(html)
+    newWindow.document.close()
+
+}
+
