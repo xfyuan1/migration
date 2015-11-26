@@ -3,6 +3,8 @@
 //need to add "X-CSRF2-Cookie":"abcd" in cookie store
 //need to add "X-CSRF2-Token":"abcd" in cookie store
 
+'use strict';
+
 function popUp(text) {
 
 	var newWindow = window.open("","Graded Quiz Json","width=500,height=500")
@@ -22,11 +24,16 @@ chrome.runtime.onMessage.addListener( function(courseId) {
 
 function manipulateJson (courseId) {
 
-	$.get("https://www.coursera.org/api/authoringCourses.v1/" + courseId, function (i) {
-		i.elements[0].course.courseMaterial.elements.forEach(function (elem) {
-			elem.elements.forEach(function (element) {
-				element.elements.forEach(function (elem) {
-					if (elem.content.typeName === 'quiz') {
+	request({
+		type: 'get',
+		url: "https://www.coursera.org/api/authoringCourses.v1/" + courseId
+	}).then(function (i) {
+
+		return Promise.all(flatMap(i.elements[0].course.courseMaterial.elements, function (elem) {
+			return flatMap(elem.elements, function (element) {
+				return element.elements
+					.filter(_ => _.content.typeName === 'quiz')
+					.map(function (elem) {
 
 						//change typeName from quiz to exam
 						elem.content.typeName = 'exam'
@@ -37,23 +44,30 @@ function manipulateJson (courseId) {
 						var url = "https://www.coursera.org/api/assess/v1/assessments/" + elem.content.definition.assessmentId
 
 						//GET Request with quiz id (previously done in Postman)
-						$.get(url).then(function (getData) {
+						return request({ type: 'get', url: url })
+							.then(function (getData) {
 
-							console.log('GET Request for ' + elem.content.definition.assessmentId)
-							
-							//Change typeName from 'formative' to 'summative' (makes it graded)
-							getData.assessment.typeName = 'summative'
+								console.log('GET Request for ' + elem.content.definition.assessmentId)
 
-							var postUrl = "https://www.coursera.org/api/assess/v1/assessments"
+								//Change typeName from 'formative' to 'summative' (makes it graded)
+								getData.assessment.typeName = 'summative'
 
-							$.ajax({
-							    type: 'POST',
-							    url: postUrl,
-							    data: JSON.stringify(getData.assessment),
-							    headers: {
-							    	"X-CSRF2-Cookie":"abcd",
-							    	"X-CSRF2-Token":"abcd"
-							    }
+								return getData
+
+							})
+							.then(function (getData) {
+
+								var postUrl = "https://www.coursera.org/api/assess/v1/assessments"
+
+								return request({
+									type: 'POST',
+									url: postUrl,
+									data: JSON.stringify(getData.assessment),
+									headers: {
+										"X-CSRF2-Cookie":"abcd",
+										"X-CSRF2-Token":"abcd"
+									}
+								})
 
 							}).then(function (i) {
 
@@ -62,7 +76,7 @@ function manipulateJson (courseId) {
 								console.log('POST Request for ' + elem.content.definition.assessmentId)
 
 
-							    ////newly generated id is equal to assessmentId
+									////newly generated id is equal to assessmentId
 								if(i.id == undefined) {
 									
 									////Should throw error here
@@ -74,16 +88,47 @@ function manipulateJson (courseId) {
 
 								console.log("Returned " + elem.content.definition.assessmentId)
 
+								return elem
+
 							});
 						})
-					}
 				})
+			}))
+			.then(function (elems) {
+				popUp(JSON.stringify(i.elements[0].course));
 			})
 		})
-
-		// **********    HACK!!!!!!!!  ********* USE A PROMISE INSTEAD
-		setTimeout( function () { 
-    		popUp(JSON.stringify(i.elements[0].course));
-		}, 3000);	
+		.then(function () {
+			console.log('done with everything!')
+		})
 	})
+}
+
+
+/// helpers
+
+// (array: Array[Array[Any]]) => Array[Any]
+function flatten (arr) {
+	return arr.reduce((a,b) => {
+		return a.concat(Array.isArray(b) ? flatten(b) : b)
+	}, [])
+}
+
+// (array: Array[Any], fn: (Any) => Array[Any]) => Array[Any]
+function flatMap (array, fn) {
+	return flatten(array.map(fn))
+}
+
+// wrapper around $.ajax that lets us use native ES6 promises
+// @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+// (args: Object) => Promise[Any]
+function request (args) {
+	return Promise.resolve(
+		$.ajax({
+			data: args.data,
+			url: args.url,
+			type: args.type,
+			headers: args.headers
+		})
+	)
 }
