@@ -1,16 +1,7 @@
 //SET UP 
-//Need to get CAUTH
+//Need to add CAUTH
 //need to add "X-CSRF2-Cookie":"abcd" in cookie store
 //need to add "X-CSRF2-Token":"abcd" in cookie store
-
-// Gets data from extension
-// chrome.runtime.onMessage.addListener(
-//   function(i) { return i
-// });
-
-//my old link: "https://www.coursera.org/api/opencourse.v1/course?courseId="
-
-//owsPspIJEeW5gxKDBxYMJw
 
 function popUp(text) {
 
@@ -93,9 +84,6 @@ function manipulateJson (courseId) {
 		// **********    HACK!!!!!!!!  ********* USE A PROMISE INSTEAD
 		setTimeout( function () { 
     		popUp(JSON.stringify(i.elements[0].course));
-		}, 3000);
-	
+		}, 3000);	
 	})
 }
-
-//manipulateJson(courseId)
