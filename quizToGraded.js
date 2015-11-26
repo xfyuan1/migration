@@ -101,8 +101,8 @@ function manipulateJson (courseId) {
 		.then(function () {
 			console.log('done with everything!')
 		})
-	})
-}
+	}
+
 
 
 /// helpers
