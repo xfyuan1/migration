@@ -2,8 +2,12 @@
 //(elementId: string, fileName: string) => ()
 //elementId is button tag id in popup.html file
 
+function getCourseId() {
+	return document.getElementById('courseField').value;
+}
 
 document.addEventListener('DOMContentLoaded', function() {
+  
   var checkBoxButton = document.getElementById('checkBox');
   checkBoxButton.addEventListener('click', function() {
     
@@ -16,13 +20,28 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.tabs.executeScript(null, {file: "deleteTimeStamps.js"});
   }, false);
 
-  var quizToGraded = document.getElementById('sessionId');
+  var quizToGraded = document.getElementById('courseIdButton');
   quizToGraded.addEventListener('click', function() {
+
+
+
+
+  	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  		chrome.tabs.sendMessage(tabs[0].id, document.getElementById('courseField').value, function(response) {
+    		console.log(response);
+  			});
+		});
     
+
+
+
     chrome.tabs.executeScript(null, {file: "quizToGraded.js"});
   }, false);
 
 }, false);
+
+
+
 
 
 

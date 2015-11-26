@@ -3,13 +3,20 @@
 //need to add "X-CSRF2-Cookie":"abcd" in cookie store
 //need to add "X-CSRF2-Token":"abcd" in cookie store
 
+// Gets data from extension
+// chrome.runtime.onMessage.addListener(
+//   function(i) { return i
+// });
 
+//my old link: "https://www.coursera.org/api/opencourse.v1/course?courseId="
+
+//owsPspIJEeW5gxKDBxYMJw
 
 function popUp(text) {
 
 	var newWindow = window.open("","Graded Quiz Json","width=500,height=500")
     
-    var html = "<html><head></head><body><b>"+ text +"</b>"
+    var html = "<html><head></head><body><b>"+ text +"</b></html>"
 
     newWindow.document.open()
     newWindow.document.write(html)
@@ -17,15 +24,15 @@ function popUp(text) {
 
 }
 
-var courseId = document.getElementById('sessionId').innerHTML
+chrome.runtime.onMessage.addListener( function(courseId) { 
+	manipulateJson(courseId)
+})
 
-//************ NEED TO GET COURSE ID ************
+
 function manipulateJson (courseId) {
 
-	//var courseId = "XEIwtIy8EeW-ng7WVUsFiQ"
-
-	$.get("https://www.coursera.org/api/opencourse.v1/course?courseId=" + courseId + "&showLockedItems=true", function (i) {
-		i.courseMaterial.elements.forEach(function (elem) {
+	$.get("https://www.coursera.org/api/authoringCourses.v1/" + courseId, function (i) {
+		i.elements[0].course.courseMaterial.elements.forEach(function (elem) {
 			elem.elements.forEach(function (element) {
 				element.elements.forEach(function (elem) {
 					if (elem.content.typeName === 'quiz') {
@@ -85,41 +92,10 @@ function manipulateJson (courseId) {
 
 		// **********    HACK!!!!!!!!  ********* USE A PROMISE INSTEAD
 		setTimeout( function () { 
-    		popUp(JSON.stringify(i));
+    		popUp(JSON.stringify(i.elements[0].course));
 		}, 3000);
 	
 	})
 }
 
-manipulateJson(courseId)
-
-
-
-
-//console.log(manipulateJson())
-
-//https://www.coursera.org/api/authoringCourses.v1/?action=superuserUpdate&id=XEIwtIy8EeW-ng7WVUsFiQ
-//https://www.coursera.org/api/onDemandCourses.v1?q=slug&slug=aaron-shell&includes=instructorIds%2CpartnerIds%2C_links&fields=partners.v1(squareLogo%2CrectangularLogo)%2Cinstructors.v1(fullName)%2CoverridePartnerLogos%2CsessionsEnabledAt
-
-
-// function copyToClipboard(text) {
-//   const input = document.createElement('input');
-//   input.style.position = 'fixed';
-//   input.style.opacity = 0;
-//   input.value = text;
-//   document.body.appendChild(input);
-//   input.select();
-//   document.execCommand('Copy');
-//   document.body.removeChild(input);
-// };
-
-// function copyTextToClipboard(text) {
-//     var copyFrom = $('<textarea/>');
-//     copyFrom.text(text);
-//     $('body').append(copyFrom);
-//     copyFrom.select();
-//     document.execCommand('copy');
-//     copyFrom.remove();
-// }
-
-
+//manipulateJson(courseId)
