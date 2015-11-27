@@ -47,9 +47,6 @@ function changeToGraded (courseId) {
 					.filter(_ => _.content.typeName === 'quiz')
 					.map(function (elem) {
 						
-						if(!elem.length) {
-							throw new Error('No quizzes found')
-						} 
 						//change typeName from quiz to exam
 						elem.content.typeName = 'exam'
 
