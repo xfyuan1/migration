@@ -1,7 +1,7 @@
 body {
     padding: 10px;
-    height: 300px;
-    width: 500px;
+    height: 200px;
+    width: 200px;
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -9,6 +9,7 @@ body {
     color: #333333;
     background-color: #fafafa;
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'sofiapro-light', Arial, sans-serif;
     font-weight: normal;
@@ -163,60 +164,10 @@ body {
     -webkit-animation: load8 1.1s infinite linear;
     animation: load8 1.1s infinite linear;
   }
+
   .loader,
   .loader:after {
     border-radius: 50%;
     width: 10em;
     height: 10em;
-  }
-  @-webkit-keyframes load8 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes load8 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-  .tabs {
-    border-bottom: 1px solid #e5e5e5;
-    margin-bottom: 15px;
-  }
-  .tabs.inverse {
-    background-color: #303030;
-    padding: 1px 10px 10px 10px;
-    margin: -10px -10px 0 -10px;
-  }
-  .tabs ul {
-    line-height: 1.4em;
-    margin-bottom: 7px;
-    -webkit-padding-start: 0;
-    width: 100%;
-    list-style: none;
-  }
-  .tabs li {
-    display: inline-block;
-    padding: 0;
-    margin-right: 20px;
-    cursor: pointer;
-  }
-  .tabs a {
-    color: #9b9b9b;
-    font-size: 14px;
-    text-decoration: none;
-    padding: 6px 0;
-  }
-  .tabs a.active {
-    border-bottom: 3px solid #999;
   }
