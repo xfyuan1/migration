@@ -7,28 +7,33 @@
 
 function loadScript (url) {
 	return new Promise(function (resolve, reject) {
+		if (window[url[1]]) {return resolve()}
 		let script = document.createElement('script')
-		script.src = url
+		script.src = url[0]
 		script.addEventListener('load', resolve)
 		script.addEventListener('error', reject)
 		document.body.appendChild(script)
+
 	})
 }
 
-var deps = [
-	'//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js'
-]
 
 //Should log a resonse that says what SLUG name is!
-chrome.runtime.onMessage.addListener( function (courseId) {
-	Promise.all(deps.map(loadScript)).then(function() {
-		changeToGraded(courseId)
+chrome.runtime.onMessage.addListener( 	
+	function (courseId) {
+		let deps = [
+			['//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js', '$']
+		]
+		Promise.all(deps.map(loadScript)).then(function() {
+			changeToGraded(courseId)
 	})
 })
 
 
 function changeToGraded (courseId) {
-	console.log("change to graded called")
+	
+	console.log("Executing...")
+	
 	request({
 		type: 'get',
 		url: "https://www.coursera.org/api/authoringCourses.v1/" + courseId
