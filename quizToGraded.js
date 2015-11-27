@@ -15,7 +15,7 @@ function loadScript (url) {
 	})
 }
 
-let deps = [
+var deps = [
 	'//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js'
 ]
 
@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener( function (courseId) {
 
 
 function changeToGraded (courseId) {
-
+	console.log("change to graded called")
 	request({
 		type: 'get',
 		url: "https://www.coursera.org/api/authoringCourses.v1/" + courseId

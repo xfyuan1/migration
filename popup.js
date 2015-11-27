@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Maybe replace document.getElementById with getCourseID()
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, document.getElementById('courseField').value, function(response) {
+      chrome.tabs.sendMessage(tabs[0].id, getCourseID, function(response) {
         console.log(response);
         });
     });

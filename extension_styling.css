@@ -14,106 +14,20 @@ body {
     font-family: 'sofiapro-light', Arial, sans-serif;
     font-weight: normal;
   }
-  .build, .user, .block {
-    background-color: #fff;
-    border-radius: 2px;
-    border: 1px solid #ebebeb;
-    box-shadow: 0 1px 2px 0 #ebebeb;
-    cursor: pointer;
-    display: block;
-    margin-bottom: 16px;
-    padding: 16px;
-    position: relative;
-    transition: border .3s;
-    width: 92%;
-  }
-  .build:hover, .user:hover {
-    border-color: #4089ca;
-  }
-  .user {
-    margin-top: 8px;
-  }
-  .user.active, .block {
-    background-color: #f0f4f6;
-    border-color: #ebebeb;
-    cursor: default;
-  }
-  .userInfo {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    text-align: right;
-  }
-  .buildTime {
-    position: absolute;
-    color: #999;
-    font-size: .9em;
-    bottom: 0;
-    right: 5px;
-  }
-  .saveToFavorites {
-    position: absolute;
-    font-size: .7em;
-    bottom: 5px;
-    right: 5px;
-    height: 20px;
-    padding: 3px 5px;
-  }
-  .fade-appear {
-    opacity: 0.01;
-    transition: opacity .5s ease-in;
-  }
-  .fade-appear.fade-appear-active {
-    opacity: 1;
-  }
-  .fade-leave {
-    opacity: 1;
-    transition: opacity .5s ease-in;
-  }
-  .fade-leave.fade-leave-active {
-    opacity: 0.01;
-  }
-  .container {
-    margin-bottom: 20px;
-  }
-  .course {
-    margin-top: 20px;
-  }
-  .course-links {
-    float: right;
-  }
-  .course-links a {
-    margin-left: 18px;
-  }
-  .course-options a {
-    margin-right: 20px;
-  }
-  .course-properties {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  .course-property {
-    word-wrap: break-word;
-  }
-  .course-property.truncated {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+
   a {
     color: #0088cc;
     text-decoration: none;
     cursor: pointer;
   }
+  
   input {
     padding: 5px;
     font-size: 1.1em;
     margin-right: 5px;
   }
-  .settingsField {
-    width: 95%;
-    margin: 5px;
-  }
+  
+  
   button {
     color: #fff;
     height: 32px;
@@ -132,42 +46,24 @@ body {
     line-height: 1.428571429;
     border-radius: 4px;
   }
+
   button.reset {
     border: none;
     background-color: #cf4b59;
     width: 100%;
   }
+
   @font-face {
     font-family: 'sofiapro';
     src: url("/type/sofiaproregular.woff2") format('woff2');
     font-weight: normal;
     font-style: normal;
   }
+
   @font-face {
     font-family: 'sofiapro-light';
     src: url("/type/sofiaprolight.woff2") format('woff2');
     font-weight: normal;
     font-style: normal;
   }
-  .loader {
-    margin: 6em auto;
-    font-size: 10px;
-    position: relative;
-    text-indent: -9999em;
-    border-top: 1.1em solid rgba(51, 51, 51, 0.2);
-    border-right: 1.1em solid rgba(51, 51, 51, 0.2);
-    border-bottom: 1.1em solid rgba(51, 51, 51, 0.2);
-    border-left: 1.1em solid #333;
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-animation: load8 1.1s infinite linear;
-    animation: load8 1.1s infinite linear;
-  }
-
-  .loader,
-  .loader:after {
-    border-radius: 50%;
-    width: 10em;
-    height: 10em;
-  }
+  
