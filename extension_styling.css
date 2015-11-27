@@ -1,0 +1,222 @@
+body {
+    padding: 10px;
+    height: 300px;
+    width: 500px;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    background-color: #fafafa;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'sofiapro-light', Arial, sans-serif;
+    font-weight: normal;
+  }
+  .build, .user, .block {
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid #ebebeb;
+    box-shadow: 0 1px 2px 0 #ebebeb;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 16px;
+    padding: 16px;
+    position: relative;
+    transition: border .3s;
+    width: 92%;
+  }
+  .build:hover, .user:hover {
+    border-color: #4089ca;
+  }
+  .user {
+    margin-top: 8px;
+  }
+  .user.active, .block {
+    background-color: #f0f4f6;
+    border-color: #ebebeb;
+    cursor: default;
+  }
+  .userInfo {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    text-align: right;
+  }
+  .buildTime {
+    position: absolute;
+    color: #999;
+    font-size: .9em;
+    bottom: 0;
+    right: 5px;
+  }
+  .saveToFavorites {
+    position: absolute;
+    font-size: .7em;
+    bottom: 5px;
+    right: 5px;
+    height: 20px;
+    padding: 3px 5px;
+  }
+  .fade-appear {
+    opacity: 0.01;
+    transition: opacity .5s ease-in;
+  }
+  .fade-appear.fade-appear-active {
+    opacity: 1;
+  }
+  .fade-leave {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }
+  .fade-leave.fade-leave-active {
+    opacity: 0.01;
+  }
+  .container {
+    margin-bottom: 20px;
+  }
+  .course {
+    margin-top: 20px;
+  }
+  .course-links {
+    float: right;
+  }
+  .course-links a {
+    margin-left: 18px;
+  }
+  .course-options a {
+    margin-right: 20px;
+  }
+  .course-properties {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .course-property {
+    word-wrap: break-word;
+  }
+  .course-property.truncated {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  a {
+    color: #0088cc;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  input {
+    padding: 5px;
+    font-size: 1.1em;
+    margin-right: 5px;
+  }
+  .settingsField {
+    width: 95%;
+    margin: 5px;
+  }
+  button {
+    color: #fff;
+    height: 32px;
+    background-color: #4089ca;
+    border-color: #3782c6;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 4px;
+  }
+  button.reset {
+    border: none;
+    background-color: #cf4b59;
+    width: 100%;
+  }
+  @font-face {
+    font-family: 'sofiapro';
+    src: url("/type/sofiaproregular.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'sofiapro-light';
+    src: url("/type/sofiaprolight.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  .loader {
+    margin: 6em auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(51, 51, 51, 0.2);
+    border-right: 1.1em solid rgba(51, 51, 51, 0.2);
+    border-bottom: 1.1em solid rgba(51, 51, 51, 0.2);
+    border-left: 1.1em solid #333;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+  }
+  .loader,
+  .loader:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+  }
+  @-webkit-keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  .tabs {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 15px;
+  }
+  .tabs.inverse {
+    background-color: #303030;
+    padding: 1px 10px 10px 10px;
+    margin: -10px -10px 0 -10px;
+  }
+  .tabs ul {
+    line-height: 1.4em;
+    margin-bottom: 7px;
+    -webkit-padding-start: 0;
+    width: 100%;
+    list-style: none;
+  }
+  .tabs li {
+    display: inline-block;
+    padding: 0;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  .tabs a {
+    color: #9b9b9b;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 6px 0;
+  }
+  .tabs a.active {
+    border-bottom: 3px solid #999;
+  }
