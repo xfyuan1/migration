@@ -5,7 +5,8 @@
 
 'use strict';
 
-chrome.runtime.onMessage.addListener( function(courseId) { 
+//Should log a resonse that says what SLUG name is!
+chrome.runtime.onMessage.addListener( function (courseId) { 
 	changeToGraded(courseId)
 })
 
@@ -18,11 +19,16 @@ function changeToGraded (courseId) {
 	}).then(function (i) {
 
 		return Promise.all(flatMap(i.elements[0].course.courseMaterial.elements, function (elem) {
+			
 			return flatMap(elem.elements, function (element) {
+
 				return element.elements
 					.filter(_ => _.content.typeName === 'quiz')
 					.map(function (elem) {
-
+						
+						if(!elem.length) {
+							throw new Error('No quizzes found')
+						} 
 						//change typeName from quiz to exam
 						elem.content.typeName = 'exam'
 
@@ -68,7 +74,7 @@ function changeToGraded (courseId) {
 								if(i.id == undefined) {
 									
 									//Should throw error here
-									console.log('no assessmentId found')
+									throw new Error('no assessmentId returned')
 
 								}
 								
@@ -82,6 +88,7 @@ function changeToGraded (courseId) {
 						})
 				})
 			}))
+			//Where is this elems parameter????
 			.then(function (elems) {
 				popUp(JSON.stringify(i.elements[0].course));
 			})
@@ -126,7 +133,7 @@ function popUp(text) {
 
 	var newWindow = window.open("","Graded Quiz Json","width=500,height=500")
     
-    var html = "<html><head></head><body><b>"+ text +"</b></html>"
+    var html = "<html><head></head><body><b>" + text + "</b></html>"
 
     newWindow.document.open()
     newWindow.document.write(html)
