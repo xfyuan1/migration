@@ -5,9 +5,25 @@
 
 'use strict';
 
+function loadScript (url) {
+	return new Promise(function (resolve, reject) {
+		let script = document.createElement('script')
+		script.src = url
+		script.addEventListener('load', resolve)
+		script.addEventListener('error', reject)
+		document.body.appendChild(script)
+	})
+}
+
+const deps = [
+	'//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js'
+]
+
 //Should log a resonse that says what SLUG name is!
-chrome.runtime.onMessage.addListener( function (courseId) { 
-	changeToGraded(courseId)
+chrome.runtime.onMessage.addListener( function (courseId) {
+	Promise.all(deps.map(loadScript)).then(function() {
+		changeToGraded(courseId)
+	})
 })
 
 
