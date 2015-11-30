@@ -106,10 +106,28 @@ function changeToGraded (courseId) {
 						})
 				})
 			}))
-			//Where is this elems parameter????
+			
+			
+
 			.then(function (elems) {
-				popUp(JSON.stringify(i.elements[0].course));
+				
+				var postSuperUserUrl = "https://www.coursera.org/api/authoringCourses.v1/?action=superuserUpdate&id=" + courseId
+				console.log(i.elements[0])
+				return request({
+					type: 'POST',
+					url: postSuperUserUrl,
+					data: JSON.stringify(i.elements[0]),
+					headers: {
+						"X-CSRF2-Cookie":"abcd",
+						"X-CSRF2-Token":"abcd"
+					}
+				})
+			
+
 			})
+			// .then(function (elems) {
+			// 	popUp(JSON.stringify(elems));
+			// })
 		})
 		.then(function () {
 			console.log('done with everything!')
@@ -147,15 +165,5 @@ function request (args) {
 }
 
 
-function popUp(text) {
 
-	var newWindow = window.open("","Graded Quiz Json","width=500,height=500")
-    
-    var html = "<html><head></head><body><b>" + text + "</b></html>"
-
-    newWindow.document.open()
-    newWindow.document.write(html)
-    newWindow.document.close()
-
-}
 
