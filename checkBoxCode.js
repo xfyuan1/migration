@@ -26,6 +26,6 @@
       toArray(elList.filter(notVideoOrQuiz)).forEach(function (i) {
         i.querySelector("div div div span[class=icon-check]").click()
       })
-
+      // change delete to unpublish if you don't want to delete
       $('.course-admin-action-delete').click()
 
