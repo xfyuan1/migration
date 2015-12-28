@@ -1,10 +1,13 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-  
+
   runFileOnClick('checkBox', 'checkBoxCode.js')
-  
+
   runFileOnClick('deleteTimes', 'deleteTimeStamps.js')
 
+  runFileOnClick('addModules', 'createModules.js')
+
+  runFileOnClick('fillEmptyModules', 'fillEmptyModules.js')
 
   var quizToGraded = document.getElementById('courseIdButton');
   quizToGraded.addEventListener('click', function() {
@@ -23,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var quizValidation = document.getElementById('slugIdButton');
   quizValidation.addEventListener('click', function() {
-  
+
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, getValue('slugField'), function(response) {
         console.log(response);
         });
     });
-    
+
     chrome.tabs.executeScript(null, {file: "quizValidation.js"});
 
   }, false);
@@ -48,10 +51,10 @@ function getValue(id) {
 //(elementId: string, fileName: string) => ()
 //elementId is button tag id in popup.html file
 function runFileOnClick (elementId, fileName) {
-  
+
   var button = document.getElementById(elementId);
     button.addEventListener('click', function() {
- 
+
     chrome.tabs.executeScript(null, {file: fileName});
   }, false)
 }
@@ -70,7 +73,7 @@ function runFileOnClick (elementId, fileName) {
 //   })
 // }
 
-// chrome.runtime.onMessage.addListener(   
+// chrome.runtime.onMessage.addListener(
 //   function (slugNumber) {
 //     let deps = [
 //       ['//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js', '$']

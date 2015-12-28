@@ -26,3 +26,6 @@
       toArray(elList.filter(notVideoOrQuiz)).forEach(function (i) {
         i.querySelector("div div div span[class=icon-check]").click()
       })
+
+      $('.course-admin-action-delete').click()
+
